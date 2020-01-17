@@ -69,11 +69,6 @@ redundancy
 !
 !
 !
-!
-!
-!
-!
-!
 interface Embedded-Service-Engine0/0
  no ip address
  shutdown
@@ -103,8 +98,6 @@ no ip http secure-server
 !
 ip route 0.0.0.0 0.0.0.0 213.218.193.153 name ---->BT_ISP_Advabox
 !
-!
-!
 snmp-server community KH9ytFvDf3mhThUwQEQc RO 2
 access-list 2 remark ------ SNMP management
 access-list 2 permit 192.168.32.12
@@ -114,8 +107,6 @@ access-list 2 permit 192.168.100.209
 access-list 2 permit 192.168.100.237
 access-list 2 permit 192.168.100.232
 access-list 2 deny   any log
-!
-!
 !
 control-plane
 !
