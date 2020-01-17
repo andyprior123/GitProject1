@@ -1,0 +1,149 @@
+service nagle
+no service pad
+service tcp-keepalives-in
+service tcp-keepalives-out
+service timestamps debug datetime msec localtime show-timezone
+service timestamps log datetime msec localtime show-timezone
+service password-encryption
+!
+hostname mu-rm-thur-17
+!
+boot-start-marker
+boot-end-marker
+!
+!
+logging buffered 16384 informational
+logging persistent
+enable secret 5 $1$0qJB$DqhlTH5cO5k9DzJc0CQpX/
+!
+aaa new-model
+!
+!
+!
+!
+!
+!
+!
+aaa session-id common
+clock timezone GMT 0 0
+clock summer-time BST recurring last Sun Mar 2:00 last Sun Oct 2:00
+!
+no ip source-route
+!
+!
+!
+!
+!
+!
+no ip bootp server
+ip domain name monutil.co.uk
+ip name-server 8.8.8.8
+ip name-server 8.8.4.4
+ip cef
+no ipv6 cef
+!
+multilink bundle-name authenticated
+!
+!
+!
+!
+license udi pid CISCO2911/K9 sn FCZ182671J9
+!
+!
+archive
+ log config
+  logging enable
+  logging size 500
+  notify syslog contenttype plaintext
+  hidekeys
+username root password 7 04435851211914640B0302440B0A0F22
+!
+redundancy
+!
+!
+!
+!
+!
+!         
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ description -- Prax facing (dg) --
+ ip address 195.162.127.177 255.255.255.248
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ description -- Adva facing --
+ ip address 213.218.193.154 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/2
+ no ip address
+ shutdown
+ duplex auto
+ speed auto
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 213.218.193.153 name ---->BT_ISP_Advabox
+!
+!
+!
+snmp-server community KH9ytFvDf3mhThUwQEQc RO 2
+access-list 2 remark ------ SNMP management
+access-list 2 permit 192.168.32.12
+access-list 2 permit 192.168.32.44
+access-list 2 permit 195.11.233.141
+access-list 2 permit 192.168.100.209
+access-list 2 permit 192.168.100.237
+access-list 2 permit 192.168.100.232
+access-list 2 deny   any log
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ exec-timeout 35777 0
+ password 7 08311F183833061106292A5221312E2D
+ logging synchronous
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output none
+ stopbits 1
+line vty 0 4
+ exec-timeout 35777 0
+ logging synchronous
+ transport input ssh
+!         
+exception memory ignore overflow processor
+exception memory ignore overflow io
+scheduler allocate 20000 1000
+ntp source GigabitEthernet0/1
+ntp server 2.uk.pool.ntp.org
+ntp server 3.uk.pool.ntp.org
+ntp server 0.uk.pool.ntp.org
+ntp server 1.uk.pool.ntp.org
+!
+end
