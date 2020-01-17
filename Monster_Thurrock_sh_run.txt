@@ -119,8 +119,6 @@ access-list 2 deny   any log
 !
 control-plane
 !
-!
-!
 line con 0
  exec-timeout 35777 0
  password 7 08311F183833061106292A5221312E2D
@@ -145,5 +143,4 @@ ntp server 2.uk.pool.ntp.org
 ntp server 3.uk.pool.ntp.org
 ntp server 0.uk.pool.ntp.org
 ntp server 1.uk.pool.ntp.org
-!
-end
+
